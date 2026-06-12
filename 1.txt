@@ -1,115 +1,45 @@
- /*
-       PrintWriter a = new PrintWriter("entradaA.txt");
-        a.println("Linea A1");
-        a.println("Linea A2");
-        a.println("Linea A3");
-        a.close();
-        
-        PrintWriter b = new PrintWriter("entradaB.txt");
-        b.println("Linea B1");
-        b.println("Linea B2");
-        b.println("Linea B3");
-        b.close();
-        
-        BufferedReader archA = new BufferedReader(new FileReader("entradaA.txt"));
-        BufferedReader archB = new BufferedReader(new FileReader("entradaB.txt"));
-        
-        PrintWriter salida = new PrintWriter("salida.txt");
-        
-        String lineaA = archA.readLine();
-        String lineaB = archB.readLine();
-        
-        while(lineaA != null && lineaB != null){
-            salida.println(lineaA);
-            salida.println(lineaB);
-            
-            lineaA = archA.readLine();
-            lineaB = archB.readLine();
-        }
-        
-        a.close();
-        b.close();
-        salida.close();
+import java.io.*;
+import java.util.Random;
 
-// 2
+public class Main {
 
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws Exception {
+
+        // Crear fichero y guardar números aleatorios
+        DataOutputStream dos =
+                new DataOutputStream(
+                        new FileOutputStream("numeros.dat"));
+
         Random r = new Random();
 
-        try {
+        for (int i = 0; i < 1000; i++) {
 
-            System.out.print("Cantidad: ");
-            int cantidad = sc.nextInt();
+            int numero = r.nextInt(1000) + 1;
 
-            DataOutputStream dos =
-                    new DataOutputStream(
-                            new FileOutputStream("numeros.dat", true));
-
-            for(int i = 0; i < cantidad; i++) {
-
-                int numero = r.nextInt(1001);
-
-                dos.writeInt(numero);
-            }
-
-            dos.close();
-
-            DataInputStream dis =
-                    new DataInputStream(
-                            new FileInputStream("numeros.dat"));
-
-            try {
-
-                while(true) {
-
-                    System.out.println(dis.readInt());
-                }
-
-            } catch(EOFException e) {
-
-            }
-
-            dis.close();
-
-        } catch(Exception e) {
-
-            System.out.println("Error");
+            dos.writeInt(numero);
         }
 
-// 3 
+        dos.close();
 
-        Scanner sc = new Scanner(System.in);
+        // Leer fichero y sumar
+        DataInputStream dis =
+                new DataInputStream(
+                        new FileInputStream("numeros.dat"));
+
+        int suma = 0;
 
         try {
 
-            System.out.print("Matricula: ");
-            String matricula = sc.nextLine();
+            while (true) {
 
-            System.out.print("Marca: ");
-            String marca = sc.nextLine();
+                suma += dis.readInt();
+            }
 
-            System.out.print("Deposito: ");
-            int deposito = sc.nextInt();
-            sc.nextLine();
+        } catch (EOFException e) {
 
-            System.out.print("Modelo: ");
-            String modelo = sc.nextLine();
-
-            DataOutputStream dos =
-                new DataOutputStream(
-                    new FileOutputStream("vehiculos.dat", true));
-
-            dos.writeUTF(matricula);
-            dos.writeUTF(marca);
-            dos.writeInt(deposito);
-            dos.writeUTF(modelo);
-
-            dos.close();
-
-            System.out.println("Vehiculo guardado");
-
-        } catch(Exception e) {
-
-            System.out.println("Error");
+            System.out.println("Suma total: " + suma);
         }
-*/
+
+        dis.close();
+    }
+}
