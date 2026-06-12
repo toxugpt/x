@@ -1,0 +1,115 @@
+ /*
+       PrintWriter a = new PrintWriter("entradaA.txt");
+        a.println("Linea A1");
+        a.println("Linea A2");
+        a.println("Linea A3");
+        a.close();
+        
+        PrintWriter b = new PrintWriter("entradaB.txt");
+        b.println("Linea B1");
+        b.println("Linea B2");
+        b.println("Linea B3");
+        b.close();
+        
+        BufferedReader archA = new BufferedReader(new FileReader("entradaA.txt"));
+        BufferedReader archB = new BufferedReader(new FileReader("entradaB.txt"));
+        
+        PrintWriter salida = new PrintWriter("salida.txt");
+        
+        String lineaA = archA.readLine();
+        String lineaB = archB.readLine();
+        
+        while(lineaA != null && lineaB != null){
+            salida.println(lineaA);
+            salida.println(lineaB);
+            
+            lineaA = archA.readLine();
+            lineaB = archB.readLine();
+        }
+        
+        a.close();
+        b.close();
+        salida.close();
+
+// 2
+
+        Scanner sc = new Scanner(System.in);
+        Random r = new Random();
+
+        try {
+
+            System.out.print("Cantidad: ");
+            int cantidad = sc.nextInt();
+
+            DataOutputStream dos =
+                    new DataOutputStream(
+                            new FileOutputStream("numeros.dat", true));
+
+            for(int i = 0; i < cantidad; i++) {
+
+                int numero = r.nextInt(1001);
+
+                dos.writeInt(numero);
+            }
+
+            dos.close();
+
+            DataInputStream dis =
+                    new DataInputStream(
+                            new FileInputStream("numeros.dat"));
+
+            try {
+
+                while(true) {
+
+                    System.out.println(dis.readInt());
+                }
+
+            } catch(EOFException e) {
+
+            }
+
+            dis.close();
+
+        } catch(Exception e) {
+
+            System.out.println("Error");
+        }
+
+// 3 
+
+        Scanner sc = new Scanner(System.in);
+
+        try {
+
+            System.out.print("Matricula: ");
+            String matricula = sc.nextLine();
+
+            System.out.print("Marca: ");
+            String marca = sc.nextLine();
+
+            System.out.print("Deposito: ");
+            int deposito = sc.nextInt();
+            sc.nextLine();
+
+            System.out.print("Modelo: ");
+            String modelo = sc.nextLine();
+
+            DataOutputStream dos =
+                new DataOutputStream(
+                    new FileOutputStream("vehiculos.dat", true));
+
+            dos.writeUTF(matricula);
+            dos.writeUTF(marca);
+            dos.writeInt(deposito);
+            dos.writeUTF(modelo);
+
+            dos.close();
+
+            System.out.println("Vehiculo guardado");
+
+        } catch(Exception e) {
+
+            System.out.println("Error");
+        }
+*/
